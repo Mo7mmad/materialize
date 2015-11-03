@@ -111,11 +111,11 @@ button.btn-floating {
     padding: 0 0 0 15px;
     ul {
       text-align: right;
-      right: 64px;
+      left: 64px;
       top: 50%;
       transform: translateY(-50%);
       height: 100%;
-      left: initial;
+      right: initial;
       width: 500px; /*width 100% only goes to width of button container */
 
       li {
@@ -125,7 +125,7 @@ button.btn-floating {
     }
   }
   position: fixed;
-  right: 23px;
+  left: 23px;
   bottom: 23px;
   padding-top: 15px;
   margin-bottom: 0;

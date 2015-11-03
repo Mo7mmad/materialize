@@ -238,7 +238,7 @@
 
 .gap-patch .circle {
   width: 1000%;
-  left: -450%;
+  right: -450%;
 }
 
 .circle-clipper {
@@ -261,7 +261,7 @@
     animation: none;
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
     bottom: 0;
   }
 

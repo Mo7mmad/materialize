@@ -46,7 +46,7 @@
 
   .btn, .btn-flat {
     margin: 0;
-    margin-left: 3rem;
+    margin-right: 3rem;
   }
 
   &.rounded{
@@ -58,10 +58,10 @@
     border-radius: 0;
   }
   @media #{$medium-only} {
-    float: left;
+    float: right;
   }
   @media #{$large-and-up} {
-    float: right;
+    float: left;
   }
 
 }

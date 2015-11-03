@@ -8,7 +8,7 @@
     &:not(.active) {
       opacity: .8;
     }
-    will-change: left, top, width, height;
+    will-change: right, top, width, height;
   }
 }
 

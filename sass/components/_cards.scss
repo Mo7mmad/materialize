@@ -98,7 +98,7 @@
       color: $card-bg-color;
       position: absolute;
       bottom: 0;
-      left: 0;
+      right: 0;
       padding: $card-padding;
     }
 
@@ -124,7 +124,7 @@
 
     a {
       color: $card-link-color;
-      margin-right: $card-padding;
+      margin-left: $card-padding;
       @include transition(color .3s ease);
       text-transform: uppercase;
 

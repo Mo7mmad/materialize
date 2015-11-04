@@ -1,8 +1,9 @@
 {
-  "name": "Materialize",
+  "name": "MaterializeRtl",
   "description": "A modern responsive front-end framework based on Material Design",
   "keywords": [
     "css",
+    "rtl",
     "js",
     "sass",
     "mobile-first",

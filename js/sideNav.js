@@ -4,7 +4,7 @@
     init : function(options) {
       var defaults = {
         menuWidth: 240,
-        edge: 'left',
+        edge: 'right',
         closeOnClick: false
       };
       options = $.extend(defaults, options);
@@ -23,22 +23,22 @@
         $('body').append(dragTarget);
 
         if (options.edge == 'left') {
-          menu_id.css('left', -1 * (options.menuWidth + 10));
+          menu_id.css('left', -1 * (options.menuWidth + 10))
+              .css('right', '');;
           dragTarget.css({'left': 0}); // Add Touch Area
         }
         else {
           menu_id.addClass('right-aligned') // Change text-alignment to right
-            .css('right', -1 * (options.menuWidth + 10))
-            .css('left', '');
+              .css('right', -1 * (options.menuWidth + 10));
           dragTarget.css({'right': 0}); // Add Touch Area
         }
 
         // If fixed sidenav, bring menu out
         if (menu_id.hasClass('fixed')) {
-            if (window.innerWidth > 992) {
-              menu_id.css('left', 0);
-            }
+          if (window.innerWidth > 992) {
+            menu_id.css('left', 0);
           }
+        }
 
         // Window resize to reset on large screens fixed
         if (menu_id.hasClass('fixed')) {
@@ -85,36 +85,36 @@
             // Reset phantom div
             dragTarget.css({width: '', right: '', left: '0'});
             menu_id.velocity(
-              {left: -1 * (options.menuWidth + 10)},
-              { duration: 200,
-                queue: false,
-                easing: 'easeOutCubic',
-                complete: function() {
-                  if (restoreNav === true) {
-                    // Restore Fixed sidenav
-                    menu_id.removeAttr('style');
-                    menu_id.css('width', options.menuWidth);
+                {left: -1 * (options.menuWidth + 10)},
+                { duration: 200,
+                  queue: false,
+                  easing: 'easeOutCubic',
+                  complete: function() {
+                    if (restoreNav === true) {
+                      // Restore Fixed sidenav
+                      menu_id.removeAttr('style');
+                      menu_id.css('width', options.menuWidth);
+                    }
                   }
-                }
 
-            });
+                });
           }
           else {
             // Reset phantom div
             dragTarget.css({width: '', right: '0', left: ''});
             menu_id.velocity(
-              {right: -1 * (options.menuWidth + 10)},
-              { duration: 200,
-                queue: false,
-                easing: 'easeOutCubic',
-                complete: function() {
-                  if (restoreNav === true) {
-                    // Restore Fixed sidenav
-                    menu_id.removeAttr('style');
-                    menu_id.css('width', options.menuWidth);
+                {right: -1 * (options.menuWidth + 10)},
+                { duration: 200,
+                  queue: false,
+                  easing: 'easeOutCubic',
+                  complete: function() {
+                    if (restoreNav === true) {
+                      // Restore Fixed sidenav
+                      menu_id.removeAttr('style');
+                      menu_id.css('width', options.menuWidth);
+                    }
                   }
-                }
-              });
+                });
           }
         }
 
@@ -172,8 +172,8 @@
               }
               // Right Direction
               else if (x >= (window.innerWidth - options.menuWidth / 2)) {
-               menuOut = false;
-             }
+                menuOut = false;
+              }
               var rightPos = -1 *(x - options.menuWidth / 2);
               if (rightPos > 0) {
                 rightPos = 0;
@@ -243,52 +243,52 @@
           }
         });
 
-          $this.click(function() {
-            if (menuOut === true) {
-              menuOut = false;
-              panning = false;
-              removeMenu();
+        $this.click(function() {
+          if (menuOut === true) {
+            menuOut = false;
+            panning = false;
+            removeMenu();
+          }
+          else {
+
+            // Disable Scrolling
+            $('body').css('overflow', 'hidden');
+            // Push current drag target on top of DOM tree
+            $('body').append(dragTarget);
+
+            if (options.edge === 'left') {
+              dragTarget.css({width: '50%', right: 0, left: ''});
+              menu_id.velocity({left: 0}, {duration: 300, queue: false, easing: 'easeOutQuad'});
             }
             else {
-
-              // Disable Scrolling
-              $('body').css('overflow', 'hidden');
-              // Push current drag target on top of DOM tree
-              $('body').append(dragTarget);
-              
-              if (options.edge === 'left') {
-                dragTarget.css({width: '50%', right: 0, left: ''});
-                menu_id.velocity({left: 0}, {duration: 300, queue: false, easing: 'easeOutQuad'});
-              }
-              else {
-                dragTarget.css({width: '50%', right: '', left: 0});
-                menu_id.velocity({right: 0}, {duration: 300, queue: false, easing: 'easeOutQuad'});
-                menu_id.css('left','');
-              }
-
-              var overlay = $('<div id="sidenav-overlay"></div>');
-              overlay.css('opacity', 0)
-              .click(function(){
-                menuOut = false;
-                panning = false;
-                removeMenu();
-                overlay.velocity({opacity: 0}, {duration: 300, queue: false, easing: 'easeOutQuad',
-                  complete: function() {
-                    $(this).remove();
-                  } });
-
-              });
-              $('body').append(overlay);
-              overlay.velocity({opacity: 1}, {duration: 300, queue: false, easing: 'easeOutQuad',
-                complete: function () {
-                  menuOut = true;
-                  panning = false;
-                }
-              });
+              dragTarget.css({width: '50%', right: '', left: 0});
+              menu_id.velocity({right: 0}, {duration: 300, queue: false, easing: 'easeOutQuad'});
+              menu_id.css('left','');
             }
 
-            return false;
-          });
+            var overlay = $('<div id="sidenav-overlay"></div>');
+            overlay.css('opacity', 0)
+                .click(function(){
+                  menuOut = false;
+                  panning = false;
+                  removeMenu();
+                  overlay.velocity({opacity: 0}, {duration: 300, queue: false, easing: 'easeOutQuad',
+                    complete: function() {
+                      $(this).remove();
+                    } });
+
+                });
+            $('body').append(overlay);
+            overlay.velocity({opacity: 1}, {duration: 300, queue: false, easing: 'easeOutQuad',
+              complete: function () {
+                menuOut = true;
+                panning = false;
+              }
+            });
+          }
+
+          return false;
+        });
       });
 
 
@@ -302,14 +302,14 @@
   };
 
 
-    $.fn.sideNav = function(methodOrOptions) {
-      if ( methods[methodOrOptions] ) {
-        return methods[ methodOrOptions ].apply( this, Array.prototype.slice.call( arguments, 1 ));
-      } else if ( typeof methodOrOptions === 'object' || ! methodOrOptions ) {
-        // Default to "init"
-        return methods.init.apply( this, arguments );
-      } else {
-        $.error( 'Method ' +  methodOrOptions + ' does not exist on jQuery.sideNav' );
-      }
-    }; // Plugin end
+  $.fn.sideNav = function(methodOrOptions) {
+    if ( methods[methodOrOptions] ) {
+      return methods[ methodOrOptions ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+    } else if ( typeof methodOrOptions === 'object' || ! methodOrOptions ) {
+      // Default to "init"
+      return methods.init.apply( this, arguments );
+    } else {
+      $.error( 'Method ' +  methodOrOptions + ' does not exist on jQuery.sideNav' );
+    }
+  }; // Plugin end
 }( jQuery ));
